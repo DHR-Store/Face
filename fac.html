@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Neon Access</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container, .password-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .neon-text {
+      font-size: 100px;
+      font-weight: bold;
+      display: flex;
+    }
+
+    .neon-text span {
+      opacity: 0;
+      transform: scale(0.5);
+      animation: neonWrite 0.8s ease-out forwards, flicker 1.5s infinite alternate;
+      display: inline-block;
+      filter: blur(5px);
+    }
+
+    .neon-text span:nth-child(1) { animation-delay: 0.3s; }
+    .neon-text span:nth-child(2) { animation-delay: 0.6s; }
+    .neon-text span:nth-child(3) { animation-delay: 0.9s; }
+    .neon-text span:nth-child(4) { animation-delay: 1.2s; }
+
+    @keyframes neonWrite {
+      0% { opacity: 0; transform: scale(0.5); filter: blur(10px); }
+      50% { opacity: 1; transform: scale(1.1); filter: blur(2px); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+
+    @keyframes flicker {
+      0% { text-shadow: 0 0 15px #00c3ff, 0 0 30px #6200ff, 0 0 45px #b200ff; }
+      100% { text-shadow: 0 0 20px #00ffff, 0 0 35px #8a2be2, 0 0 50px #ff00ff; }
+    }
+
+    .password-box {
+      display: none;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .password-box h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #00c3ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0072ff;
+    }
+
+    .error {
+      margin-top: 10px;
+      color: #ff6b6b;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Neon Animation -->
+  <div class="container" id="neonContainer">
+    <h1 class="neon-text">
+      <span>A</span><span>n</span><span>i</span><span>m</span><span>e</span>
+    </h1>
+  </div>
+  <audio id="sirenSound">
+  <source src="mixkit-police-siren-us-1643 (1).wav" preload="auto" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+  <!-- Password Box -->
+  <div class="password-box" id="passwordBox">
+    <h2>Enter Password</h2>
+    <input type="password" id="passwordInput" placeholder="Enter......" />
+    <button onclick="checkPassword()">Unlock</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <script>
+    // Transition to password box after neon animation
+    setTimeout(() => {
+      document.getElementById('neonContainer').style.display = 'none';
+      document.getElementById('passwordBox').style.display = 'flex';
+    }, 3000); // Wait ~3 seconds for full neon effect
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      const errorMsg = document.getElementById("errorMsg");
+      if (input === "D420") {
+        window.location.href = "https://www.facebook.com/A2anime?mibextid=rS40aB7S9Ucbxw6v";
+      } else {
+        errorMsg.textContent = "Wrong password! Try again.";
+      }
+    }
+    function checkPassword() {
+  const input = document.getElementById("passwordInput").value;
+  const errorMsg = document.getElementById("errorMsg");
+  const sirenSound = document.getElementById("sirenSound"); // Get the audio element
+
+  if (input === "D420") {
+    // If correct password, stop any looping siren and redirect
+    sirenSound.pause(); // Pause the siren if it was playing
+    sirenSound.currentTime = 0; // Reset its time
+    window.location.href = "https://www.facebook.com/A2anime?mibextid=rS40aB7S9Ucbxw6v";
+  } else {
+    errorMsg.textContent = "Wrong password! Try again.";
+    sirenSound.loop = true; // Set the loop property to true
+    sirenSound.play();     // Start playing
+  }
+}
+
+  </script>
+</body>
+</html>
